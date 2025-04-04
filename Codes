@@ -1,0 +1,29 @@
+number 1
+function addComment() {
+    const input = document.getElementById('commentInput').value;
+    const commentsDiv = document.getElementById('comments');
+    
+    // Create a new div element safely
+    const commentDiv = document.createElement('div');
+    commentDiv.classList.add('comment');
+    commentDiv.textContent = input; // Safe encoding
+    
+    commentsDiv.appendChild(commentDiv);
+    document.getElementById('commentInput').value = '';
+}
+
+
+number2
+const { body, validationResult } = require('express-validator');
+
+app.post('/comment', [
+    body('comment').escape() // Sanitizes input
+], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    
+    // Save sanitized comment to database
+    saveCommentToDB(req.body.comment);
+});
